@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- Latest compiled and minified CSS & JS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="//code.jquery.com/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row header">
+			<h1>Survey Questions</h1>
+			<h2>On a scale of 1-4, 1 being that you strongly disagree and 4 being that you strongly agree, please answer these questions. 
+			</div>
+			<div class="form-group">
+				<form action="" method="POST" role="form">
+					<legend><strong><h1>About You</h1></strong></legend>
+
+					<div class="form-group">
+						<label for="">Name (Required)</label>
+						<input type="text" class="form-control" id="newFriendName" placeholder="Name">
+
+						<label for="">Link to Photo Image (Required)</label>
+						<input type="text" class="form-control" id="newFriendPhoto" placeholder="Link to Photo">
+						<hr>
+						<label for="q1"></h1>Question 1:</h1></label>
+						<br> You like to drink alcohol
+						<select class="form-control" id="q1">
+							<option value="" disabled selected hidden>Please Choose...</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+
+						<label for="2"></h1>Question 2</h1></label>
+						<br> You like to do outdoor activies like hiking, running, or biking.
+						<select class="form-control" id="q2">
+							<option value="" disabled selected hidden>Please Choose...</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+
+						<label for="q3"></h1>Question 3:</h1></label>
+						<br> You like to travel
+						<select class="form-control" id="q3">
+							<option value="" disabled selected hidden>Please Choose...</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+
+						<label for="q4"></h1>Question 4:</h1></label>
+						<br> You like building web apps for hypothetical use cases to impress potential employers
+						<select class="form-control" id="q4">
+							<option value="" disabled selected hidden>Please Choose...</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+
+						<label for="q5"></h1>Question 5:</h1></label>
+						<br>You like large groups of people
+						<select class="form-control" id="q5">
+							<option value="" disabled selected hidden>Please Choose...</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+
+						<label for="q6"></h1>Question 6:</h1></label>
+						<br> You like movies
+						<select class="form-control" id="q6">
+							<option value="" disabled selected hidden>Please Choose...</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+
+						<label for="q7"></h1>Question 7:</h1></label>
+						<br> You like music
+						<select class="form-control" id="q7">
+							<option value="" disabled selected hidden>Please Choose...</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+
+						<label for="q8"></h1>Question 8:</h1></label>
+						<br> You like animals 
+						<select class="form-control" id="q8">
+							<option value="" disabled selected hidden>Please Choose...</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+
+						<label for="q9"></h1>Question 9:</h1></label>
+						<br> You like children
+						<select class="form-control" id="q9">
+							<option value="" disabled selected hidden>Please Choose...</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+
+						<label for="q10"></h1>Question 10:</h1></label>
+						<br> You like sports
+						<select class="form-control" id="q10">
+							<option value="" disabled selected hidden>Please Choose...</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary submitBtn">Submit</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<a href ="/api/friends">API Friends List</a>
+			</div>
+		</div>
+
+		<script type = "text/javascript">
+			$(".submitBtn").on("click", function(event){
+				event.preventDefault();
+			//create a new Object for friend being added
+			var newFriend = {
+				//grabs values from form
+				name: $("#newFriendName").val().trim(),
+				photo: $("#newFriendPhoto").val().trim(),
+				scores: []
+			};
+			//iterate through each question input and add them to the scores array in the newFriend object
+			for(var i = 1; i <= 10; i++){
+				var question = "#q" + i;
+				newFriend.scores.push($(question).val());
+			}
+			console.log(newFriend);
+
+		//post request to add our new Friend to the friends API data
+		$.post("/api/friends", newFriend)
+		.done(function(data) {
+			console.log(data);
+			console.log("Adding friend...");
+		});
+	});
+</script>
+</body>
+</html>
+
+<!-- on button click, loop through each question value and push them ot a new array -->
+
