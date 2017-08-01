@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/sternj20/friendfinder/issues"
   },
-  "homepage": "https://github.com/sternj20/friendfinder#readme"
+  "homepage": "https://github.com/sternj20/friendfinder#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "path": "^0.12.7"
+  }
 }
