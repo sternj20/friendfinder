@@ -17,6 +17,7 @@ module.exports = function(app){
 		//keeps track of difference amount per person
 		var totalDifferenceAmt;
 		var differenceAmt;
+		var bestMatch;
 		// iterate through the friends array
 		for(var i = 0; i < friends.length; i++){
 				for(var j = 0; j < 10; j++){
@@ -40,7 +41,9 @@ module.exports = function(app){
 			return a.totalDiff - b.totalDiff;
 		});
 		//return the closest match
-		console.log(friends[0]);
-		res.json(newFriend);
+		// console.log(friends[0]);
+		bestMatch = friends[0];
+		// console.log(bestMatch)
+		res.json(bestMatch);
 	});
 };

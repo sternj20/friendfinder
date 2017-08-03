@@ -125,7 +125,7 @@
 							<option>4</option>
 						</select>
 					</div>
-					<button type="submit" class="btn btn-primary submitBtn">Submit</button>
+					<button type="submit" class="btn btn-primary submitBtn" data-toggle="modal" data-target="#myModal">Submit</button>
 				</form>
 			</div>
 		</div>
@@ -135,6 +135,28 @@
 				<a href ="/api/friends">API Friends List</a>
 			</div>
 		</div>
+
+	<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><h1>The best match for you is</h1></p>
+        <h2 id = "matchName">
+        </h2>
+        <img id = "matchImg" width = "300" height = "300">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 		<script type = "text/javascript">
 			$(".submitBtn").on("click", function(event){
@@ -151,13 +173,13 @@
 				var question = "#q" + i;
 				newFriend.scores.push($(question).val());
 			}
-			console.log(newFriend);
 
 		//post request to add our new Friend to the friends API data
 		$.post("/api/friends", newFriend)
 		.done(function(data) {
-			console.log(data);
-			console.log("Adding friend...");
+			var bestMatch = data;
+			$("#matchName").text(bestMatch.name);
+			$("#matchImg").attr("src", bestMatch.photo);
 		});
 	});
 </script>
