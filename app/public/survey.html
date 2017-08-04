@@ -166,7 +166,8 @@
 				//grabs values from form
 				name: $("#newFriendName").val().trim(),
 				photo: $("#newFriendPhoto").val().trim(),
-				scores: []
+				scores: [],
+				totalDiff: 0
 			};
 			//iterate through each question input and add them to the scores array in the newFriend object
 			for(var i = 1; i <= 10; i++){
